@@ -20,34 +20,50 @@
 (defun re-copy (re)
   (%make-rational-extension :coefficients (%re-coefficients-copy (%re-coefficients re))))
 
+(defun re-coefficient-size (re)
+  (%re-coefficient-size (%re-coefficients re)))
+
+(defun re-map-coefficients (fn re)
+  (%re-map-coefficients fn (%re-coefficients re)))
+
+(defun make-rational-extension-from-rational (q)
+  (make-rational-extension q))
+
 (defun make-rational-extension (&rest cfs)
   (let ((coefficients (%re-default-coefficients)))
-    (loop :for (q . s) :in cfs
+    (loop :for cc :in cfs
+          :for (q . s) := (cond
+                            ((rationalp cc)
+                             (cons cc 1))
+                            (t
+                             cc))
           :do (progn
                 (check-type q rational)
                 (check-type s square-free)
                 (when (minusp s)
                   (setf q (- q)
                         s (- s)))
-                (setf (%re-coefficient-of s coefficients) q)))
+                (incf (%re-coefficient-of s coefficients 0) q)))
     (%make-rational-extension :coefficients coefficients)))
 
 (defmethod make-load-form ((object rational-extension) &optional environment)
   (declare (ignorable environment))
   `(make-rational-extension ,@(mapcar (lambda (c)
-                                        (destructuring-bind (s . q) c
-                                          `'(,q . ,s)))
+                                        (destructuring-bind (q . s) c
+                                          (if (= s 1)
+                                              q
+                                              `'(,q . ,s))))
                                       (re-coefficients-alist object))))
 
 (defmethod print-object ((object rational-extension) stream)
   (flet ((print-coeffs ()
            (let ((cfs (sort (re-coefficients-alist object)
                             #'<
-                            :key #'first)))
+                            :key #'cdr)))
              (if (null cfs)
                  (format stream "0")
                  (loop :with firstp := t
-                       :for ( s . q ) :in cfs
+                       :for ( q . s ) :in cfs
                        :unless firstp
                          :do (if (plusp q)
                                  (princ " + " stream)
