@@ -18,6 +18,10 @@ For example:
                              (cons 1 2)
                              (cons 4/5 3))    => 1 - 1/2·√2 + 4/5·√3
 
+Note: technically, the integers do not have to be square-free:
+
+    (make-rational-extension '(3 . 64) '(1 . 12))  => 24 + 2·√3
+
 Accessors
 ---------
 

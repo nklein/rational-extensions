@@ -29,6 +29,16 @@
 (defun make-rational-extension-from-rational (q)
   (make-rational-extension q))
 
+(defun %make-square-free (q s)
+  (unless (square-free-p s)
+    (loop :for x :from 2
+          :for xx := (* x x)
+          :while (<= xx s)
+          :when (zerop (mod s xx))
+            :do (setf s (/ s xx)
+                      q (* q x))))
+  (values q s))
+
 (defun make-rational-extension (&rest cfs)
   (let ((coefficients (%re-default-coefficients)))
     (loop :for cc :in cfs
@@ -37,7 +47,7 @@
                              (cons cc 1))
                             (t
                              cc))
-          :do (progn
+          :do (multiple-value-bind (q  s) (%make-square-free q s)
                 (check-type q rational)
                 (check-type s square-free)
                 (when (minusp s)

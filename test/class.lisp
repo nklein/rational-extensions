@@ -21,6 +21,9 @@
   (nst:def-test constructor-accumulates (:equalp "1 + √2")
     (%to-string (make-rational-extension 2/3 '(3/4 . 2) 1/3 '(1/4 . 2))))
 
+  (nst:def-test constructor-fixes-non-square-frees (:equalp "24 + 2·√3")
+    (%to-string (make-rational-extension '(3 . 64) '(1 . 12))))
+
   (nst:def-test format-with-first-coefficient-negative (:equalp "-1/3·√2 + 5/9·√3")
     (%to-string (make-rational-extension '(-1/3 . 2) '(5/9 . 3))))
 
