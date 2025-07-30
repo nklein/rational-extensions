@@ -76,11 +76,6 @@
                                (cons (- q) s)
                                (cons q s)))))
 
-(let ((re (make-rational-extension '(1/3 . 2))))
-  (values (%re/-find-coefficient re)
-          (%re/-make-conjugate re 2)
-          (%re/ re)))
-
 (defun %re/ (re)
   (let ((numerator (make-rational-extension 1)))
     (flet ((scale (v)
@@ -90,7 +85,7 @@
             :do (multiple-value-bind (s q) (%re/-find-coefficient re)
                   (cond
                     ((= s 1)
-                     (scale (make-rational-extension (cons (/ q) 1))))
+                     (scale (make-rational-extension (/ q))))
                     (t
                      (scale (%re/-make-conjugate re s))))))
       numerator)))
