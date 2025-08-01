@@ -6,7 +6,8 @@
   :license "UNLICENSE"
   :version "0.1.20250801"
   :depends-on (#:alexandria)
-  :in-order-to ((asdf:test-op (asdf:test-op :rational-extensions/test)))
+  :in-order-to ((asdf:test-op (asdf:test-op :rational-extensions/test)
+                              (asdf:test-op :rational-extensions/test/math)))
   :components
   ((:static-file "README.md")
    (:static-file "UNLICENSE.txt")
