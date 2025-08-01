@@ -13,4 +13,13 @@
   (:export :re+
            :re-
            :re*
-           :re/))
+           :re/
+           :re-zerop
+           :re-plusp
+           :re-minusp
+           :re=
+           :re<
+           :re<=
+           :re>
+           :re>=
+           ))
