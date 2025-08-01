@@ -8,8 +8,8 @@
            :rational-extension-p
            :re-coefficient-of
            :re-coefficients-alist
-           :make-rational-extension-from-rational
-           :make-rational-extension)
+           :make-rational-extension
+           :re)
   (:export :re+
            :re-
            :re*

@@ -6,9 +6,6 @@
   (nst:def-test constructor-with-no-arguments (:equalp "0")
     (%to-string (make-rational-extension)))
 
-  (nst:def-test constructor-for-rational (:equalp "2/3")
-    (%to-string (make-rational-extension-from-rational 2/3)))
-
   (nst:def-test constructor-with-rational (:equalp "2/3")
     (%to-string (make-rational-extension 2/3)))
 
@@ -17,6 +14,9 @@
 
   (nst:def-test constructor-with-arguments-out-of-order (:equalp "1/4 - 1/3·√2 + 5/9·√3")
     (%to-string (make-rational-extension '(5/9 . 3) 1/4 '(-1/3 . 2))))
+
+  (nst:def-test shortname-constructor-with-arguments-out-of-order (:equalp "1/4 - 1/3·√2 + 5/9·√3")
+    (%to-string (re '(5/9 . 3) 1/4 '(-1/3 . 2))))
 
   (nst:def-test constructor-accumulates (:equalp "1 + √2")
     (%to-string (make-rational-extension 2/3 '(3/4 . 2) 1/3 '(1/4 . 2))))

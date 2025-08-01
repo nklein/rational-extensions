@@ -4,7 +4,7 @@
   :description "RATIONAL-EXTENSIONS is implements extension fields of rationals by square roots of integers."
   :author "Patrick Stein <pat@nklein.com>"
   :license "UNLICENSE"
-  :version "0.1.20250730"
+  :version "0.1.20250801"
   :depends-on (#:alexandria)
   :in-order-to ((asdf:test-op (asdf:test-op :rational-extensions/test)))
   :components
@@ -27,8 +27,8 @@
   :description "Tests for the RATIONAL-EXTENSIONS package."
   :author "Patrick Stein <pat@nklein.com>"
   :license "UNLICENSE"
-  :version "0.1.20250730"
-  :depends-on ((:version #:rational-extensions "0.1.20250730") #:nst)
+  :version "0.1.20250801"
+  :depends-on ((:version #:rational-extensions "0.1.20250801") #:nst)
   :perform (asdf:test-op (o c)
                          (uiop:symbol-call :rational-extensions/test :run-all-tests))
   :components

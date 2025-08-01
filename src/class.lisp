@@ -26,9 +26,6 @@
 (defun re-map-coefficients (fn re)
   (%re-map-coefficients fn (%re-coefficients re)))
 
-(defun make-rational-extension-from-rational (q)
-  (make-rational-extension q))
-
 (defun %make-square-free (q s)
   (unless (square-free-p s)
     (loop :for x :from 2
@@ -55,6 +52,9 @@
                         s (- s)))
                 (incf (%re-coefficient-of s coefficients 0) q)))
     (%make-rational-extension :coefficients coefficients)))
+
+(defun re (&rest cfs)
+  (apply #'make-rational-extension cfs))
 
 (defmethod make-load-form ((object rational-extension) &optional environment)
   (declare (ignorable environment))
