@@ -83,9 +83,13 @@
                        :do (setf firstp nil)
                        :do (if (= s 1)
                                (format stream "~A" q)
-                               (if (= q 1)
-                                   (format stream "√~A" s)
-                                   (format stream "~A·√~A" q s))))))))
+                               (cond
+                                 ((= q 1)
+                                  (format stream "√~A" s))
+                                 ((= q -1)
+                                  (format stream "-√~A" s))
+                                 (t
+                                  (format stream "~A·√~A" q s)))))))))
     (cond
       (*print-readably*
        (call-next-method))
