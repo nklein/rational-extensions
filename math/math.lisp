@@ -11,7 +11,11 @@
      (defmethod ,name ((a rational-extension) (b rational))
        (,fn a (re b)))
      (defmethod ,name ((a rational) (b rational-extension))
-       (,fn (re a) b))))
+       (,fn (re a) b))
+     (defmethod ,name ((a rational-extension) (b number))
+       (,name (re-realify a) b))
+     (defmethod ,name ((a number) (b rational-extension))
+       (,name a (re-realify b)))))
 
 (defbinary add re+)
 (defbinary subtract re-)
@@ -42,3 +46,23 @@
 (defunary zerop re-zerop)
 (defunary plusp re-plusp)
 (defunary minusp re-minusp)
+
+(defmethod sqrt ((a rational))
+  ;;
+  ;; (sqrt kkp/llq)
+  ;;    = (k/l)(sqrt p/q)
+  ;;    = (k/lq)(sqrt pq)
+  ;;
+  (let* ((p/q (make-square-free a))
+         (p (numerator p/q))
+         (q (denominator p/q))
+         (kk/ll (/ a p/q))
+         (kk (numerator kk/ll))
+         (ll (denominator kk/ll)))
+    (re (cons (/ (isqrt kk)
+                 (* (isqrt ll)
+                    q))
+              (* p q)))))
+
+(defmethod sqrt ((a rational-extension))
+    (sqrt (re-realify a)))

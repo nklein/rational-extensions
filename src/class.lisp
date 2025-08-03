@@ -36,6 +36,12 @@
                       q (* q x))))
   (values q s))
 
+(defun make-square-free (q)
+  (let* ((n (nth-value 0 (%make-square-free 1 (numerator q))))
+         (d (nth-value 0 (%make-square-free 1 (denominator q))))
+         (n/d (/ n d)))
+    (/ q (* n/d n/d))))
+
 (defun make-rational-extension (&rest cfs)
   (let ((coefficients (%re-default-coefficients)))
     (loop :for cc :in cfs
@@ -55,6 +61,12 @@
 
 (defun re (&rest cfs)
   (apply #'make-rational-extension cfs))
+
+(defun re-realify (re)
+  (loop :for (q . s) :in (re-coefficients-alist re)
+        :summing (if (= s 1)
+                     q
+                     (* q (sqrt (coerce s 'double-float))))))
 
 (defmethod make-load-form ((object rational-extension) &optional environment)
   (declare (ignorable environment))

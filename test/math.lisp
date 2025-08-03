@@ -77,6 +77,21 @@
     (%to-string (let ((re (make-rational-extension 1 '(3/2 . 2))))
                   (re/ re re)))))
 
+(nst:def-test-group realify-tests ()
+  (nst:def-test realify-rational (:equalp 3/5)
+    (re-realify (re 3/5)))
+
+  (nst:def-test realify-rational-is-rational (:predicate rationalp)
+    (re-realify (re 3/5)))
+
+  (nst:def-test realify-irrational (:true)
+    (< (abs (- (re-realify (re 1/2 '(1/2 . 5)))
+               1.618033988749))
+       1/100000))
+
+  (nst:def-test realify-irrational-is-real (:predicate realp)
+    (re-realify (re 1/2 '(1/2 . 5)))))
+
 (nst:def-test-group re-comparison-tests ()
   (nst:def-test zerop (:seq :true (:not :true) (:not :true))
     (list (re-zerop (make-rational-extension 0))

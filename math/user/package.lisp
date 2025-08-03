@@ -12,6 +12,8 @@
       :1+ :1-
       :incf :decf)
   (:shadowing-import-from #:rational-extensions/math
+      :sqrt)
+  (:shadowing-import-from #:rational-extensions/math
       :< :<= := :>= :>
       :lessp :less-equal-p :equalp :greater-equal-p :greaterp
       :min :max))

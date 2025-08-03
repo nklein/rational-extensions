@@ -11,6 +11,8 @@
       :signum :abs
       :1+ :1-
       :incf :decf)
+  (:shadowing-import-from #:generic-cl.math
+      :sqrt)
   (:shadowing-import-from #:generic-cl.comparison
       :< :<= := :>= :>
       :lessp :less-equal-p :equalp :greater-equal-p :greaterp
@@ -21,6 +23,7 @@
       :signum :abs
       :1+ :1-
       :incf :decf)
+  (:export :sqrt)
   (:export :< :<= := :>= :>
       :lessp :less-equal-p :equalp :greater-equal-p :greaterp
       :min :max))

@@ -8,8 +8,10 @@
            :rational-extension-p
            :re-coefficient-of
            :re-coefficients-alist
+           :make-square-free
            :make-rational-extension
-           :re)
+           :re
+           :re-realify)
   (:export :re+
            :re-
            :re*
