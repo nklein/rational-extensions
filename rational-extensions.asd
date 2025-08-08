@@ -4,7 +4,7 @@
   :description "RATIONAL-EXTENSIONS is implements extension fields of rationals by square roots of integers."
   :author "Patrick Stein <pat@nklein.com>"
   :license "UNLICENSE"
-  :version "0.1.20250802"
+  :version "0.1.20250808"
   :depends-on (#:alexandria)
   :in-order-to ((asdf:test-op (asdf:test-op :rational-extensions/test)
                               (asdf:test-op :rational-extensions/test/math)))
@@ -28,7 +28,7 @@
   :description "RATIONAL-EXTENSIONS/MATH uses the GENERIC-CL package to wrap the RATIONAL-EXTENSIONS."
   :author "Patrick Stein <pat@nklein.com>"
   :license "UNLICENSE"
-  :version "0.1.20250802"
+  :version "0.1.20250808"
   :depends-on (#:rational-extensions #:generic-cl.arithmetic #:generic-cl.comparison #:generic-cl.math)
   :in-order-to ((asdf:test-op (asdf:test-op :rational-extensions/test/math)))
   :components
@@ -42,7 +42,7 @@
   :description "RATIONAL-EXTENSIONS/MATH-USER uses RATIONAL-EXTENSIONS/MATH and CL-USER."
   :author "Patrick Stein <pat@nklein.com>"
   :license "UNLICENSE"
-  :version "0.1.20250802"
+  :version "0.1.20250808"
   :depends-on (#:rational-extensions/math)
   :components
   ((:static-file "README.md")
@@ -54,8 +54,8 @@
   :description "Tests for the RATIONAL-EXTENSIONS package."
   :author "Patrick Stein <pat@nklein.com>"
   :license "UNLICENSE"
-  :version "0.1.20250802"
-  :depends-on ((:version #:rational-extensions "0.1.20250802") #:nst)
+  :version "0.1.20250808"
+  :depends-on ((:version #:rational-extensions "0.1.20250808") #:nst)
   :perform (asdf:test-op (o c)
                          (uiop:symbol-call :rational-extensions/test :run-all-tests))
   :components
@@ -75,8 +75,8 @@
   :description "Tests for the RATIONAL-EXTENSIONS/MATH package."
   :author "Patrick Stein <pat@nklein.com>"
   :license "UNLICENSE"
-  :version "0.1.20250802"
-  :depends-on ((:version #:rational-extensions/math "0.1.20250802") #:nst)
+  :version "0.1.20250808"
+  :depends-on ((:version #:rational-extensions/math "0.1.20250808") #:nst)
   :perform (asdf:test-op (o c)
                          (uiop:symbol-call :rational-extensions/test/math :run-all-tests))
   :components

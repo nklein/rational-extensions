@@ -44,25 +44,32 @@
   (re* (re -1) a))
 
 (defunary zerop re-zerop)
+(defunary signum re-signum)
 (defunary plusp re-plusp)
 (defunary minusp re-minusp)
 
 (defmethod sqrt ((a rational))
-  ;;
-  ;; (sqrt kkp/llq)
-  ;;    = (k/l)(sqrt p/q)
-  ;;    = (k/lq)(sqrt pq)
-  ;;
-  (let* ((p/q (make-square-free a))
-         (p (numerator p/q))
-         (q (denominator p/q))
-         (kk/ll (/ a p/q))
-         (kk (numerator kk/ll))
-         (ll (denominator kk/ll)))
-    (re (cons (/ (isqrt kk)
-                 (* (isqrt ll)
-                    q))
-              (* p q)))))
+  (cond
+    ((zerop a)
+     0)
+    ((minusp a)
+     (sqrt (coerce a 'double-float)))
+    (t
+     ;;
+     ;; (sqrt kkp/llq)
+     ;;    = (k/l)(sqrt p/q)
+     ;;    = (k/lq)(sqrt pq)
+     ;;
+     (let* ((p/q (make-square-free a))
+            (p (numerator p/q))
+            (q (denominator p/q))
+            (kk/ll (/ a p/q))
+            (kk (numerator kk/ll))
+            (ll (denominator kk/ll)))
+       (re (cons (/ (isqrt kk)
+                    (* (isqrt ll)
+                       q))
+                 (* p q)))))))
 
 (defmethod sqrt ((a rational-extension))
     (sqrt (re-realify a)))

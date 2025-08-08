@@ -135,6 +135,11 @@
           (zerop (make-rational-extension 1))
           (zerop (make-rational-extension '(-1 . 2)))))
 
+  (nst:def-test signum (:seq (:equalp -1) (:equalp 0) (:equalp 1))
+    (list (signum (make-rational-extension 2 '(19/180 . 3) '(-109/90 . 6) '(1/60 . 2158)))
+          (signum (make-rational-extension 0))
+          (signum (make-rational-extension (+ 2 1/8) '(19/180 . 3) '(-109/90 . 6) '(1/60 . 2158)))))
+
   (nst:def-test plusp (:seq (:not :true) :true :true (:not :true))
     (list (plusp (make-rational-extension 0))
           (plusp (make-rational-extension 1))

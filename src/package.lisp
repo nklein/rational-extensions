@@ -16,6 +16,7 @@
            :re-
            :re*
            :re/
+           :re-signum
            :re-zerop
            :re-plusp
            :re-minusp
@@ -23,5 +24,4 @@
            :re<
            :re<=
            :re>
-           :re>=
-           ))
+           :re>=))
