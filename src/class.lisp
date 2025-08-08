@@ -27,13 +27,12 @@
   (%re-map-coefficients fn (%re-coefficients re)))
 
 (defun %make-square-free (q s)
-  (unless (square-free-p s)
-    (loop :for x :from 2
-          :for xx := (* x x)
-          :while (<= xx s)
-          :when (zerop (mod s xx))
-            :do (setf s (/ s xx)
-                      q (* q x))))
+  (loop :for x :from (isqrt s) :downto 2
+        :for xx := (* x x)
+        :while (<= xx s)
+        :when (zerop (mod s xx))
+          :do (setf s (/ s xx)
+                    q (* q x)))
   (values q s))
 
 (defun make-square-free (q)
