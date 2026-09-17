@@ -62,10 +62,14 @@
   (apply #'make-rational-extension cfs))
 
 (defun re-realify (re)
-  (loop :for (q . s) :in (re-coefficients-alist re)
-        :summing (if (= s 1)
-                     q
-                     (* q (sqrt (coerce s 'double-float))))))
+  (typecase re
+    (rational-extension
+     (loop :for (q . s) :in (re-coefficients-alist re)
+           :summing (if (= s 1)
+                        q
+                        (* q (sqrt (coerce s 'double-float))))))
+    (t
+     re)))
 
 (defmethod make-load-form ((object rational-extension) &optional environment)
   (declare (ignorable environment))
